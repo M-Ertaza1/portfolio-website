@@ -1247,3 +1247,17 @@ footer span:last-child {
   .whatsapp-fab svg { width: 24px; height: 24px; }
   .whatsapp-fab-tooltip { display: none; }
 }
+
+
+
+
+
+
+.live-badge {
+  background: #2d8a4e;
+  color: #fff;
+}
+.project-link-live {
+  color: #43e97b;
+  font-weight: 600;
+}

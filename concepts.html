@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Concepts & GitHub Guide — Hafiz Muhammad Ertaza</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #f9f8f5;
+    --bg2: #ffffff;
+    --bg3: #f2f1ed;
+    --text: #1a1a1a;
+    --muted: #6b6b6b;
+    --border: #e5e3dc;
+    --accent-html: #e44d26;
+    --accent-css: #264de4;
+    --accent-js: #f0db4f;
+    --accent-js-dark: #c9a800;
+    --accent-git: #f05032;
+    --accent-green: #2d8a4e;
+    --font-head: 'Syne', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.7;
+    padding: 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* ── TOP HEADER ── */
+  .page-header {
+    text-align: center;
+    padding: 3rem 0 2rem;
+    border-bottom: 2px solid var(--border);
+    margin-bottom: 3rem;
+  }
+
+  .page-header h1 {
+    font-family: var(--font-head);
+    font-size: 2.4rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.5rem;
+  }
+
+  .page-header p {
+    color: var(--muted);
+    font-weight: 300;
+    font-size: 1rem;
+  }
+
+  /* ── SECTION HEADERS ── */
+  .section-block { margin-bottom: 3.5rem; }
+
+  .section-heading {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1.25rem;
+  }
+
+  .lang-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-head);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 99px;
+    color: #fff;
+  }
+
+  .badge-html { background: var(--accent-html); }
+  .badge-css  { background: var(--accent-css); }
+  .badge-js   { background: #000; color: var(--accent-js); }
+  .badge-git  { background: var(--accent-git); }
+
+  .section-heading h2 {
+    font-family: var(--font-head);
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  /* ── CONCEPT TABLE ── */
+  .concept-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--bg2);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    font-size: 0.88rem;
+  }
+
+  .concept-table thead tr {
+    background: var(--bg3);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .concept-table th {
+    text-align: left;
+    padding: 12px 16px;
+    font-weight: 600;
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .concept-table td {
+    padding: 11px 16px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  .concept-table tr:last-child td { border-bottom: none; }
+
+  .concept-table tr:hover td { background: #fafaf7; }
+
+  .concept-name {
+    font-weight: 500;
+    color: var(--text);
+    white-space: nowrap;
+  }
+
+  .concept-desc { color: var(--muted); line-height: 1.5; }
+
+  code {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    padding: 2px 7px;
+    border-radius: 4px;
+    color: var(--text);
+    white-space: nowrap;
+  }
+
+  .code-example {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: #333;
+    line-height: 1.5;
+  }
+
+  /* ── GIT GUIDE ── */
+  .git-section { margin-bottom: 3.5rem; }
+
+  .steps-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+
+  .step-item {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 1rem;
+    align-items: start;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+  }
+
+  .step-num {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--text);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-head);
+    font-size: 0.85rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .step-num.git { background: var(--accent-git); }
+  .step-num.green { background: var(--accent-green); }
+
+  .step-content h3 {
+    font-family: var(--font-head);
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+    letter-spacing: -0.01em;
+  }
+
+  .step-content p {
+    font-size: 0.875rem;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+
+  .code-block {
+    background: #1a1a1a;
+    color: #e8e8e8;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    padding: 12px 14px;
+    border-radius: 8px;
+    line-height: 1.8;
+    overflow-x: auto;
+  }
+
+  .code-block .comment { color: #6b8c6b; }
+  .code-block .cmd { color: #79c0ff; }
+  .code-block .str { color: #a5d6ff; }
+  .code-block .highlight { color: #ffa657; }
+
+  .tip-box {
+    background: #f0faf4;
+    border: 1px solid #b8e6ca;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.83rem;
+    color: #2d6a4f;
+    margin-top: 8px;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  .tip-box::before { content: '💡'; flex-shrink: 0; }
+
+  .warn-box {
+    background: #fff8f0;
+    border: 1px solid #f5c490;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.83rem;
+    color: #7a4000;
+    margin-top: 8px;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  .warn-box::before { content: '⚠️'; flex-shrink: 0; }
+
+  /* ── DIVIDER ── */
+  .divider {
+    border: none;
+    border-top: 2px dashed var(--border);
+    margin: 3rem 0;
+  }
+
+  /* ── QUICK REF CARD ── */
+  .quick-ref {
+    background: #1a1a1a;
+    color: #e8e8e8;
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .quick-ref h2 {
+    font-family: var(--font-head);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 1.25rem;
+    letter-spacing: -0.01em;
+  }
+
+  .qr-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+
+  .qr-item { display: flex; flex-direction: column; gap: 4px; }
+
+  .qr-label {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #888;
+  }
+
+  .qr-code {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: #79c0ff;
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    body { padding: 0; font-size: 12px; }
+    .code-block { font-size: 10px; }
+  }
+
+  @media (max-width: 600px) {
+    body { padding: 1rem; }
+    .concept-table { font-size: 0.78rem; }
+    .step-item { grid-template-columns: 32px 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>Concepts & GitHub Guide</h1>
+  <p>Reference sheet for Hafiz Muhammad Ertaza · Portfolio Project</p>
+</div>
+
+<!-- ════════════════════════════════════════════
+     PART 1 — CONCEPTS TABLES
+     ════════════════════════════════════════════ -->
+
+<h2 style="font-family:'Syne',sans-serif; font-size:1.8rem; font-weight:800; letter-spacing:-0.02em; margin-bottom:2rem;">
+  Part 1 — Language Concepts
+</h2>
+
+<!-- HTML -->
+<div class="section-block">
+  <div class="section-heading">
+    <span class="lang-badge badge-html">HTML</span>
+    <h2>HyperText Markup Language</h2>
+  </div>
+  <table class="concept-table">
+    <thead>
+      <tr>
+        <th style="width:18%">Concept</th>
+        <th style="width:30%">What it means</th>
+        <th style="width:32%">Example</th>
+        <th style="width:20%">Used in your portfolio</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="concept-name">Tag</td>
+        <td class="concept-desc">A keyword in angle brackets that tells the browser what something is</td>
+        <td><code class="code-example">&lt;p&gt;Hello&lt;/p&gt;</code></td>
+        <td class="concept-desc">Every element: nav, section, div, h1…</td>
+      </tr>
+      <tr>
+        <td class="concept-name">Attribute</td>
+        <td class="concept-desc">Extra info added inside a tag to configure it</td>
+        <td><code class="code-example">&lt;a href="..."&gt;</code></td>
+        <td class="concept-desc"><code>href</code>, <code>class</code>, <code>id</code>, <code>target</code></td>
+      </tr>
+      <tr>
+        <td class="concept-name">Semantic Tags</td>
+        <td class="concept-desc">Tags with meaning — tell the browser the purpose of content</td>
+        <td><code class="code-example">&lt;nav&gt; &lt;section&gt; &lt;footer&gt;</code></td>
+        <td class="concept-desc">nav, section, footer used throughout</td>
+      </tr>
+      <tr>
+        <td class="concept-name">Heading tags</td>
+        <td class="concept-desc">h1 is biggest/most important, h6 is smallest. Only one h1 per page</td>
+        <td><code class="code-example">&lt;h1&gt; to &lt;h6&gt;</code></td>
+        <td class="concept-desc">h1 for name, h2 for section titles, h3 for project names</td>
+      </tr>
+      <tr>
+        <td class="concept-name">div & span</td>
+        <td class="concept-desc">Generic containers. div = block (takes full width), span = inline (fits content)</td>
+        <td><code class="code-example">&lt;div class="card"&gt;</code></td>
+        <td class="concept-desc">Cards, grids, stat boxes, badges</td>
+      </tr>
+      <tr>
+        <td class="concept-name">class vs id</td>
+        <td class="concept-desc">class = reusable (many elements). id = unique (one element per page)</td>
+        <td><code class="code-example">class="card" id="hero"</code></td>
+        <td class="concept-desc">id for sections (#hero, #about), class for styling groups</td>
+      </tr>
+      <tr>
+        <td class="concept-name">Anchor tag</td>
+        <td class="concept-desc">Creates links — to other pages, sections on same page, or email</td>
+        <td><code class="code-example">&lt;a href="#about"&gt;About&lt;/a&gt;</code></td>
+        <td class="concept-desc">Nav links, project links, contact email, social buttons</td>
+      </tr>
+      <tr>
+        <td class="concept-name">meta tags</td>
+        <td class="concept-desc">Info about the page — for browsers and search engines. Goes in &lt;head&gt;</td>
+        <td><code class="code-example">&lt;meta charset="UTF-8"&gt;</code></td>
+        <td class="concept-desc">charset and viewport at top of file</td>
+      </tr>
+      <tr>
+        <td class="concept-name">SVG</td>
+        <td class="concept-desc">Scalable Vector Graphics — crisp icons and shapes drawn with code, not images</td>
+        <td><code class="code-example">&lt;svg&gt;&lt;path d="..."/&gt;&lt;/svg&gt;</code></td>
+        <td class="concept-desc">GitHub, LinkedIn, arrow icons throughout</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- CSS -->
+<div class="section-block">
+  <div class="section-heading">
+    <span class="lang-badge badge-css">CSS</span>
+    <h2>Cascading Style Sheets</h2>
+  </div>
+  <table class="concept-table">
+    <thead>
+      <tr>
+        <th style="width:18%">Concept</th>
+        <th style="width:30%">What it means</th>
+        <th style="width:32%">Example</th>
+        <th style="width:20%">Used in your portfolio</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="concept-name">Selector</td>
+        <td class="concept-desc">Picks which HTML element(s) to style. Can target tag, class, or id</td>
+        <td><code class="code-example">nav { } .card { } #hero { }</code></td>
+        <td class="concept-desc">Every style rule in your CSS</td>
+      </tr>
+      <tr>
+        <td class="concept-name">CSS Variables</td>
+        <td class="concept-desc">Store values once, reuse everywhere. Defined in :root. Change one → updates everywhere</td>
+        <td><code class="code-example">--accent: #6c63ff; color: var(--accent);</code></td>
+        <td class="concept-desc">All colours defined as --bg, --accent, --muted etc.</td>
+      </tr>
+      <tr>
+        <td class="concept-name">Box Model</td>
+        <td class="concept-desc">Every element is a box: content → padding → border → margin</td>
+        <td><code class="code-example">padding: 1rem; margin: 0 auto;</code></td>
+        <td class="concept-desc">Spacing on every card, section, button</td>
+      </tr>
+      <tr>
+        <td class="concept-name">Flexbox</td>
+        <td class="concept-desc">Arranges items in a row or column. Great for nav bars, button groups, centered content</td>
+        <td><code class="code-example">display: flex; align-items: center; gap: 1rem;</code></td>
+        <td class="concept-desc">Nav, hero CTA buttons, social links, step items</td>
+      </tr>
+      <tr>
+        <td class="concept-name">Grid</td>
+        <td class="concept-desc">Two-dimensional layout. Define columns and rows. Best for card grids</td>
+        <td><code class="code-example">display: grid; grid-template-columns: 1fr 1fr;</code></td>
+        <td class="concept-desc">Skills grid, projects grid, about grid, stats grid</td>
+      </tr>
+      <tr>
+        <td class="concept-name">Position</td>
+        <td class="concept-desc">Controls where an element sits. fixed = stays on scroll, absolute = relative to parent</td>
+        <td><code class="code-example">position: fixed; top: 0;</code></td>
+        <td class="concept-desc">Nav bar (fixed), glow blobs (absolute), WIP badge (absolute)</td>
+      </tr>
+      <tr>
+        <td class="concept-name">Pseudo-classes</td>
+        <td class="concept-desc">Style an element in a specific state — hover, focus, first-child etc.</td>
+        <td><code class="code-example">.btn:hover { background: #7c74ff; }</code></td>
+        <td class="concept-desc">All hover effects on buttons, cards, links</td>
+      </tr>
+      <tr>
+        <td class="concept-name">Pseudo-elements</td>
+        <td class="concept-desc">::before and ::after insert virtual content before/after an element</td>
+        <td><code class="code-example">.hero-tag::before { content: ''; }</code></td>
+        <td class="concept-desc">Pulsing dot on hero tag, noise texture overlay on body</td>
+      </tr>
+      <tr>
+        <td class="concept-name">@keyframes</td>
+        <td class="concept-desc">Defines a CSS animation — what happens at 0%, 50%, 100% of the animation</td>
+        <td><code class="code-example">@keyframes fadeUp { from { opacity:0; } to { opacity:1; } }</code></td>
+        <td class="concept-desc">fadeUp (hero text), pulse (green dot)</td>
+      </tr>
+      <tr>
+        <td class="concept-name">transition</td>
+        <td class="concept-desc">Smoothly animates a property change (like hover colour change)</td>
+        <td><code class="code-example">transition: color 0.2s ease;</code></td>
+        <td class="concept-desc">All hover effects — buttons, cards, nav links</td>
+      </tr>
+      <tr>
+        <td class="concept-name">Media queries</td>
+        <td class="concept-desc">Apply different styles at different screen sizes — makes site mobile-friendly</td>
+        <td><code class="code-example">@media (max-width: 768px) { nav { padding: 1rem; } }</code></td>
+        <td class="concept-desc">Mobile responsive section at bottom of CSS</td>
+      </tr>
+      <tr>
+        <td class="concept-name">clamp()</td>
+        <td class="concept-desc">Sets a value between a min and max — fluid font sizing that adapts to screen</td>
+        <td><code class="code-example">font-size: clamp(3rem, 7vw, 5.5rem);</code></td>
+        <td class="concept-desc">h1 and section titles — responsive without media queries</td>
+      </tr>
+      <tr>
+        <td class="concept-name">backdrop-filter</td>
+        <td class="concept-desc">Applies a visual effect (like blur) to what's behind an element</td>
+        <td><code class="code-example">backdrop-filter: blur(16px);</code></td>
+        <td class="concept-desc">Navbar glass effect when scrolling over content</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- JS -->
+<div class="section-block">
+  <div class="section-heading">
+    <span class="lang-badge badge-js">JS</span>
+    <h2>JavaScript</h2>
+  </div>
+  <table class="concept-table">
+    <thead>
+      <tr>
+        <th style="width:18%">Concept</th>
+        <th style="width:30%">What it means</th>
+        <th style="width:32%">Example</th>
+        <th style="width:20%">Used in your portfolio</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="concept-name">const / let</td>
+        <td class="concept-desc">Declare variables. const = never reassigned. let = can change later</td>
+        <td><code class="code-example">const name = "Ertaza"; let count = 0;</code></td>
+        <td class="concept-desc"><code>const observer = new IntersectionObserver(...)</code></td>
+      </tr>
+      <tr>
+        <td class="concept-name">Arrow function</td>
+        <td class="concept-desc">Short way to write a function using =>. No need for the "function" keyword</td>
+        <td><code class="code-example">const greet = (name) => "Hi " + name;</code></td>
+        <td class="concept-desc">Callback inside IntersectionObserver</td>
+      </tr>
+      <tr>
+        <td class="concept-name">querySelectorAll</td>
+        <td class="concept-desc">Finds all HTML elements matching a CSS selector. Returns a list</td>
+        <td><code class="code-example">document.querySelectorAll('.card')</code></td>
+        <td class="concept-desc">Selects all .reveal elements to observe</td>
+      </tr>
+      <tr>
+        <td class="concept-name">forEach</td>
+        <td class="concept-desc">Loops through every item in a list and runs a function on each</td>
+        <td><code class="code-example">items.forEach(item => console.log(item))</code></td>
+        <td class="concept-desc">Loops through each .reveal element to attach observer</td>
+      </tr>
+      <tr>
+        <td class="concept-name">classList</td>
+        <td class="concept-desc">Add, remove, or toggle CSS classes on an element with JavaScript</td>
+        <td><code class="code-example">el.classList.add('visible')</code></td>
+        <td class="concept-desc">Adds 'visible' class to trigger CSS animation</td>
+      </tr>
+      <tr>
+        <td class="concept-name">IntersectionObserver</td>
+        <td class="concept-desc">Watches if an element enters or exits the visible screen area (viewport)</td>
+        <td><code class="code-example">new IntersectionObserver(callback, { threshold: 0.1 })</code></td>
+        <td class="concept-desc">Triggers scroll reveal animations as user scrolls down</td>
+      </tr>
+      <tr>
+        <td class="concept-name">Callback function</td>
+        <td class="concept-desc">A function passed into another function to be called later</td>
+        <td><code class="code-example">observer.observe(el)</code> → runs callback when el is visible</td>
+        <td class="concept-desc">The entries => { } function inside IntersectionObserver</td>
+      </tr>
+      <tr>
+        <td class="concept-name">Conditional (if)</td>
+        <td class="concept-desc">Run code only when a condition is true</td>
+        <td><code class="code-example">if (e.isIntersecting) { e.target.classList.add('visible') }</code></td>
+        <td class="concept-desc">Only adds class when element is on screen</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<hr class="divider"/>
+
+<!-- ════════════════════════════════════════════
+     PART 2 — GITHUB PUSH GUIDE
+     ════════════════════════════════════════════ -->
+
+<h2 style="font-family:'Syne',sans-serif; font-size:1.8rem; font-weight:800; letter-spacing:-0.02em; margin-bottom:2rem;">
+  Part 2 — Push to GitHub (Step by Step)
+</h2>
+
+<!-- Quick Ref -->
+<div class="quick-ref">
+  <h2>⚡ Git Cheat Sheet — Commands You'll Use Every Time</h2>
+  <div class="qr-grid">
+    <div class="qr-item"><span class="qr-label">Check status</span><span class="qr-code">git status</span></div>
+    <div class="qr-item"><span class="qr-label">Stage all files</span><span class="qr-code">git add .</span></div>
+    <div class="qr-item"><span class="qr-label">Save a snapshot</span><span class="qr-code">git commit -m "message"</span></div>
+    <div class="qr-item"><span class="qr-label">Upload to GitHub</span><span class="qr-code">git push origin main</span></div>
+    <div class="qr-item"><span class="qr-label">See history</span><span class="qr-code">git log --oneline</span></div>
+    <div class="qr-item"><span class="qr-label">Download changes</span><span class="qr-code">git pull origin main</span></div>
+  </div>
+</div>
+
+<!-- PHASE A: One-time setup -->
+<div class="git-section">
+  <div class="section-heading">
+    <span class="lang-badge badge-git">Phase A</span>
+    <h2>One-Time Setup (Do This Once on Your Laptop)</h2>
+  </div>
+
+  <ul class="steps-list">
+
+    <li class="step-item">
+      <div class="step-num git">1</div>
+      <div class="step-content">
+        <h3>Install Git</h3>
+        <p>Download and install Git from the official site. Keep all default settings during install.</p>
+        <div class="code-block">
+          <span class="comment"># Download from:</span><br/>
+          <span class="str">https://git-scm.com/download/win</span><br/>
+          <br/>
+          <span class="comment"># After install, verify it works — open VS Code terminal and type:</span><br/>
+          <span class="cmd">git</span> --version
+        </div>
+        <div class="tip-box">You should see something like: git version 2.x.x. If yes, Git is installed!</div>
+      </div>
+    </li>
+
+    <li class="step-item">
+      <div class="step-num git">2</div>
+      <div class="step-content">
+        <h3>Tell Git who you are</h3>
+        <p>Git needs your name and email to label your commits. Do this once — it applies to all projects.</p>
+        <div class="code-block">
+          <span class="cmd">git</span> config --global user.name <span class="str">"Hafiz Muhammad Ertaza"</span><br/>
+          <span class="cmd">git</span> config --global user.email <span class="str">"muhammadertaza620@gmail.com"</span>
+        </div>
+        <div class="tip-box">Use the same email as your GitHub account.</div>
+      </div>
+    </li>
+
+  </ul>
+</div>
+
+<!-- PHASE B: Create repo on GitHub -->
+<div class="git-section">
+  <div class="section-heading">
+    <span class="lang-badge badge-git">Phase B</span>
+    <h2>Create the Repository on GitHub</h2>
+  </div>
+
+  <ul class="steps-list">
+
+    <li class="step-item">
+      <div class="step-num green">3</div>
+      <div class="step-content">
+        <h3>Create a new repository on GitHub</h3>
+        <p>Go to github.com while logged in as M-Ertaza1 and create a new repo.</p>
+        <div class="code-block">
+          <span class="comment"># On GitHub.com:</span><br/>
+          Click the <span class="highlight">+</span> button (top right) → <span class="highlight">New repository</span><br/>
+          <br/>
+          Repository name: <span class="str">portfolio-website</span><br/>
+          Description: <span class="str">Personal developer portfolio — HTML, CSS, JavaScript</span><br/>
+          Visibility: <span class="highlight">Public</span><br/>
+          <br/>
+          <span class="comment"># IMPORTANT: Do NOT tick "Add README" — leave it empty</span><br/>
+          Click <span class="highlight">Create repository</span>
+        </div>
+        <div class="warn-box">Do not initialise with README, .gitignore, or license. Keep it completely empty — you will push your files into it.</div>
+      </div>
+    </li>
+
+    <li class="step-item">
+      <div class="step-num green">4</div>
+      <div class="step-content">
+        <h3>Copy your repository URL</h3>
+        <p>After creating, GitHub shows a page with setup instructions. Copy the HTTPS URL.</p>
+        <div class="code-block">
+          <span class="comment"># Your repo URL will look like this:</span><br/>
+          <span class="str">https://github.com/M-Ertaza1/portfolio-website.git</span><br/>
+          <br/>
+          <span class="comment"># Copy it — you'll need it in the next step</span>
+        </div>
+      </div>
+    </li>
+
+  </ul>
+</div>
+
+<!-- PHASE C: Push from VS Code -->
+<div class="git-section">
+  <div class="section-heading">
+    <span class="lang-badge badge-git">Phase C</span>
+    <h2>Push Your Files from VS Code Terminal</h2>
+  </div>
+
+  <ul class="steps-list">
+
+    <li class="step-item">
+      <div class="step-num git">5</div>
+      <div class="step-content">
+        <h3>Open your portfolio folder in VS Code terminal</h3>
+        <p>In VS Code, open the terminal: press <code>Ctrl + `</code> (backtick key, below Esc). Make sure you are inside the folder that contains index.html.</p>
+        <div class="code-block">
+          <span class="comment"># Check you're in the right folder — should show index.html:</span><br/>
+          <span class="cmd">dir</span><br/>
+          <br/>
+          <span class="comment"># If not, navigate to your folder:</span><br/>
+          <span class="cmd">cd</span> C:\Users\YourName\Desktop\portfolio-website
+        </div>
+        <div class="tip-box">In VS Code you can also right-click your folder in the Explorer panel → "Open in Integrated Terminal" to open directly in the right folder.</div>
+      </div>
+    </li>
+
+    <li class="step-item">
+      <div class="step-num git">6</div>
+      <div class="step-content">
+        <h3>Initialise Git in your folder</h3>
+        <p>This turns your folder into a Git repository. Run this only once per project.</p>
+        <div class="code-block">
+          <span class="cmd">git</span> init
+        </div>
+        <div class="tip-box">You'll see: "Initialized empty Git repository in ..." — that's correct.</div>
+      </div>
+    </li>
+
+    <li class="step-item">
+      <div class="step-num git">7</div>
+      <div class="step-content">
+        <h3>Stage your files</h3>
+        <p>Tell Git which files to include in your first save. The dot ( . ) means "all files".</p>
+        <div class="code-block">
+          <span class="cmd">git</span> add .<br/>
+          <br/>
+          <span class="comment"># Verify what was staged:</span><br/>
+          <span class="cmd">git</span> status
+        </div>
+        <div class="tip-box">You should see index.html listed in green under "Changes to be committed".</div>
+      </div>
+    </li>
+
+    <li class="step-item">
+      <div class="step-num git">8</div>
+      <div class="step-content">
+        <h3>Make your first commit</h3>
+        <p>A commit is like saving a snapshot of your project with a description of what you did.</p>
+        <div class="code-block">
+          <span class="cmd">git</span> commit -m <span class="str">"Initial commit: Add portfolio website"</span>
+        </div>
+        <div class="tip-box">The message in quotes describes this snapshot. Always write something meaningful.</div>
+      </div>
+    </li>
+
+    <li class="step-item">
+      <div class="step-num git">9</div>
+      <div class="step-content">
+        <h3>Connect to your GitHub repository</h3>
+        <p>Link your local folder to the GitHub repo you created in Step 3.</p>
+        <div class="code-block">
+          <span class="cmd">git</span> remote add origin <span class="str">https://github.com/M-Ertaza1/portfolio-website.git</span><br/>
+          <br/>
+          <span class="comment"># Verify the connection:</span><br/>
+          <span class="cmd">git</span> remote -v
+        </div>
+        <div class="tip-box">remote -v should show: origin https://github.com/M-Ertaza1/portfolio-website.git (fetch) and (push).</div>
+      </div>
+    </li>
+
+    <li class="step-item">
+      <div class="step-num git">10</div>
+      <div class="step-content">
+        <h3>Rename branch to main (if needed)</h3>
+        <p>GitHub uses "main" as the default branch. Make sure your local branch matches.</p>
+        <div class="code-block">
+          <span class="cmd">git</span> branch -M main
+        </div>
+      </div>
+    </li>
+
+    <li class="step-item">
+      <div class="step-num green">11</div>
+      <div class="step-content">
+        <h3>Push to GitHub 🚀</h3>
+        <p>Upload your files to GitHub. GitHub may ask you to log in — use your GitHub username and password (or a personal access token).</p>
+        <div class="code-block">
+          <span class="cmd">git</span> push -u origin main
+        </div>
+        <div class="tip-box">After this, go to github.com/M-Ertaza1/portfolio-website — your index.html should be there!</div>
+        <div class="warn-box">If GitHub asks for a password and rejects it, you need a Personal Access Token (PAT). Go to GitHub → Settings → Developer Settings → Personal Access Tokens → Generate new token (classic) → tick "repo" → copy and use as your password.</div>
+      </div>
+    </li>
+
+  </ul>
+</div>
+
+<!-- PHASE D: After first push -->
+<div class="git-section">
+  <div class="section-heading">
+    <span class="lang-badge badge-git">Phase D</span>
+    <h2>Every Time You Make Changes (After First Push)</h2>
+  </div>
+
+  <ul class="steps-list">
+
+    <li class="step-item">
+      <div class="step-num green">★</div>
+      <div class="step-content">
+        <h3>The 3-command routine — memorise this</h3>
+        <p>Every time you update your portfolio or any project, run these 3 commands in order:</p>
+        <div class="code-block">
+          <span class="comment"># 1. Stage your changes</span><br/>
+          <span class="cmd">git</span> add .<br/>
+          <br/>
+          <span class="comment"># 2. Commit with a description of what you changed</span><br/>
+          <span class="cmd">git</span> commit -m <span class="str">"Update: add LinkedIn link and fix email"</span><br/>
+          <br/>
+          <span class="comment"># 3. Push to GitHub</span><br/>
+          <span class="cmd">git</span> push origin main
+        </div>
+        <div class="tip-box">Good commit messages describe WHAT you changed. Bad: "update". Good: "Fix nav links on mobile, update email in contact section".</div>
+      </div>
+    </li>
+
+  </ul>
+</div>
+
+<!-- PHASE E: GitHub Pages -->
+<div class="git-section">
+  <div class="section-heading">
+    <span class="lang-badge badge-git">Phase E</span>
+    <h2>Make Your Portfolio Live on the Internet (Free Hosting)</h2>
+  </div>
+
+  <ul class="steps-list">
+
+    <li class="step-item">
+      <div class="step-num green">12</div>
+      <div class="step-content">
+        <h3>Enable GitHub Pages</h3>
+        <p>GitHub can host your HTML site for free — no server needed. Your site will be live at a real URL.</p>
+        <div class="code-block">
+          <span class="comment"># On GitHub.com:</span><br/>
+          Go to your repo: <span class="str">github.com/M-Ertaza1/portfolio-website</span><br/>
+          Click <span class="highlight">Settings</span> tab (top of repo)<br/>
+          Scroll down to <span class="highlight">Pages</span> (left sidebar)<br/>
+          Under Source: select <span class="highlight">Deploy from a branch</span><br/>
+          Branch: <span class="highlight">main</span> → folder: <span class="highlight">/ (root)</span><br/>
+          Click <span class="highlight">Save</span><br/>
+          <br/>
+          <span class="comment"># Wait 1-2 minutes, then your site is live at:</span><br/>
+          <span class="str">https://M-Ertaza1.github.io/portfolio-website</span>
+        </div>
+        <div class="tip-box">Share this URL on your CV, LinkedIn, and GitHub profile README. This is your live portfolio link!</div>
+      </div>
+    </li>
+
+  </ul>
+</div>
+
+<hr class="divider"/>
+
+<div style="text-align:center; color: var(--muted); font-size: 0.85rem; padding: 1rem 0 2rem;">
+  Prepared for Hafiz Muhammad Ertaza · github.com/M-Ertaza1 · Portfolio Project 1
+</div>
+
+</body>
+</html>
